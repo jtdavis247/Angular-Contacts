@@ -1,0 +1,21 @@
+<div>
+	<p>{{ contact.firstName }}</p>
+</div>
+
+<form ng-submit="saveContact()">
+	<input type="text" class = "space-top" ng-model="contact.firstName" /><br />
+	<input type="text" class = "space-top" ng-model="contact.lastName" /><br />
+	<input type="text" class = "space-top" ng-model="contact.JobTitle" /><br />
+	<input type="text" class = "space-top" ng-model="contact.phone" /><br />
+	<input type="text"  class = "space-top" ng-model="contact.email" /><br />
+	<input type="submit" class = "space-top" value = "Update" />
+
+</form><br />
+
+<a ng-href="#/contacts">Back to Full Contacts List</a>
+
+
+<div ng-repeat="contact in contacts"></br>
+	<a ng-href="#/contacts/{{ contact.$id }}">{{ contact.firstName +  " " + contact.lastName }}</a>
+	<a ng-click="deleteContact(contact)"> X</a></p>
+</div>

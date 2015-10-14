@@ -1,0 +1,114 @@
+
+<div class = "row">
+
+<div class="col-xs-12 col-md-8" style = "border-right:1px solid #a2a2a2">
+
+
+
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+
+        <input type="text" class="form-control" placeholder="Search for contacts by name or job title" ng-model="searchName">
+
+      </div>      
+    </div>
+  </form>
+  
+
+<ul ng-repeat="contact in contacts | orderBy:sortName:sortJob:!sortReverse | filter:searchName">
+	<li>
+		<a ng-href="#/contacts/{{ contact.$id }}">{{ contact.firstName +  " " + contact.lastName }} </a>
+		<div class = "pull-right">
+			<a ng-click="deleteContact(contact)"><i class = "fa fa-trash fa-2 green space"></i></a>
+			<a href = "" ng-click="showInfo=true"><i class="fa fa-pencil space"></i></a>
+			</br>
+		</div>
+		<form ng-show="showInfo">
+		<div class = "row">
+			<div class="col-xs-7 col-md-5">
+				<input type="text" class = "form-control" ng-model="contact.firstName" ng-change="contact.$save()" placeholder= "First Name*" /><br />
+				<input type="text" class = "form-control" placeholder= "Phone Number" ng-model="contact.phone" /><br />
+				<input type="text" class = "form-control" ng-model="contact.JobTitle" /><br />
+			</div>
+			<div class="col-xs-7 col-md-5">
+				<input type="text" class = "form-control" placeholder= "Last Name" ng-model="contact.lastName" /><br />
+				
+				<input type="text"  class = "form-control" placeholder= "Email Address" ng-model="contact.email" /><br />
+				<input type="submit" ng-click="showInfo=false" class = "btn btn-primary" value = "Update" />
+			</div>
+
+		</form><br />
+	</li>
+</ul>
+</div>
+<div class="col-xs-6 col-md-4">
+<div class = "button-add"><a href = "" ng-click="showme=true" class = "right"><i class="fa fa-plus-square fa-4"></i> Add a Contact</a>
+</div>
+<form ng-submit="submitContact()" ng-show="showme" name = "myForm" class ="side-form">
+	
+	<div class="form-group">
+		<input type="text" name = "firstName" class = "form-control" 
+		placeholder= "First Name*" 
+		ng-model="contact.firstName" 
+		required/>
+
+		<div class="help-block red-alert" ng-messages="myForm.firstName.$error" ng-if="myForm.firstName.$touched">
+		    <p ng-message="required">Your First name is required.</p>
+		</div>
+
+	</div>	
+	<div class="form-group">
+		<input type="text" name= "lastName" class = "form-control" 
+		placeholder= "Last Name*" 
+		ng-model="contact.lastName" 
+		required/>
+
+		<div class="help-block red-alert" ng-messages="myForm.lastName.$error" ng-if="myForm.lastName.$touched">
+		    <p ng-message="required">Your last name is required.</p>
+		</div>
+	</div>
+	<div class="form-group">	
+		<input type="text" class = "form-control" placeholder= "Job Title" ng-model="contact.JobTitle" />
+
+		<!-- ngmessages go here -->
+	</div>
+	<div class="form-group">
+		<input type="text" name= "phone" class = "form-control" placeholder= "Phone Number*" 
+		ng-model="contact.phone" 
+		ng-minlength="10" 
+		ng-maxlength="10" 
+		required/>
+
+		<div class="help-block red-alert" ng-messages="myForm.phone.$error" ng-if="myForm.phone.$touched">
+		    <p ng-message="minlength">Your number is too short.</p>
+		    <p ng-message="maxlength">Your number is too long.</p>
+		    <p ng-message="required">Your number is required.</p>
+		</div>
+	</div> 
+
+	<div class="form-group">
+		<input type="email"  name= "email" class = "form-control"
+			placeholder= "Email Address"
+		  	ng-model="email.text"
+		  	ng-minlength="5"
+		    />
+
+		<div class="help-block red-alert" ng-messages="myForm.email.$error" ng-if="myForm.email.$touched">
+			    <p ng-message="minlength">Your email is too short.</p>
+			    <p ng-message="email">This needs to be a valid email</p>
+		</div>
+	</div>
+	
+
+	
+	<input type="submit" class="btn btn-success" ng-disabled="myForm.$invalid" ng-click="showme=false"  value = "Add Contact" /></br></br>
+
+	<a href = "" ng-click="showme=false"><button class = "btn btn-danger">Cancel Add</button></a>
+
+
+</form>
+</div>
+
+</div>
