@@ -2,7 +2,6 @@
 
 app.controller('ContactsCtrl', function($scope, Contact) {
 	$scope.contacts = Contact.all;
-
 	$scope.contact = {firstName: '', lastName: '',
 					 	JobTitle: '', phone: '', 
 					 	email: ''};
@@ -19,7 +18,9 @@ app.controller('ContactsCtrl', function($scope, Contact) {
 		});
 		
 	};
-
+	$scope.saveContact = function(contactId) {
+		Contact.save(contactId);
+	};
 
 
 	$scope.deleteContact = function(contact) {

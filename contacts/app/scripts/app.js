@@ -16,8 +16,8 @@ var app = angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'firebase',
-    'ngMessages'
+    'firebase'
+
   ])
   .constant('FIREBASE_URL', 'https://managecontacts.firebaseio.com/')
   .config(function ($routeProvider) {

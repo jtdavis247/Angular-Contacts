@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('Contact', function($firebase, FIREBASE_URL) {
+app.factory('Contact', ['$firebase', 'FIREBASE_URL', function($firebase, FIREBASE_URL) {
 	var ref = new Firebase(FIREBASE_URL);
 	var contacts = $firebase(ref.child('contacts')).$asArray();
 
@@ -14,8 +14,11 @@ app.factory('Contact', function($firebase, FIREBASE_URL) {
 		},
 		delete: function(contact) {
 			return contacts.$remove(contact);
+		},
+		save: function(contactId) {
+			return contacts.$save(contactId);
 		}
 	};
 
 	return Contact;
-});
+}]);
